@@ -12,8 +12,10 @@ body.hide{cursor:none}
 #ui.on{display:block}
 #toast{position:fixed;right:16px;bottom:16px;padding:8px 14px;background:rgba(0,0,0,.78);color:#fff;font-size:15px;border-radius:6px;opacity:0;transition:opacity .3s;z-index:9}
 #toast.on{opacity:1}
-#fsHint{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);padding:10px 22px;background:rgba(0,0,0,.75);color:#fff;font-size:18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:9;white-space:nowrap}
+#fsHint{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;max-width:92vw;box-sizing:border-box;padding:12px 26px;background:rgba(0,0,0,.78);color:#fff;font-size:18px;line-height:1.4;border-radius:18px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:9}
 #fsHint.on{opacity:1}
+#fsHint span{white-space:nowrap}
+#fsHint kbd{margin-right:4px}
 kbd{background:#333;padding:1px 7px;border-radius:4px;border:1px solid #666}
 </style>
 </head>
@@ -30,7 +32,7 @@ kbd{background:#333;padding:1px 7px;border-radius:4px;border:1px solid #666}
 <kbd>H</kbd> ẩn/hiện bảng này
 </div>
 <div id="toast"></div>
-<div id="fsHint">Nhấn <kbd>F</kbd> để mở toàn màn hình &nbsp;·&nbsp; <kbd>Space</kbd> để kích hoạt</div>
+<div id="fsHint"><span><kbd>F</kbd> toàn màn hình</span><span><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd><kbd>5</kbd> sáng từng vòng tay</span><span><kbd>Space</kbd> kích hoạt</span><span><kbd>R</kbd> reset</span></div>
 
 <script>
 (() => {
