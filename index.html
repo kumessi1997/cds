@@ -26,21 +26,21 @@ kbd{background:#333;padding:1px 7px;border-radius:4px;border:1px solid #666}
 <kbd>F</kbd> / <kbd>F11</kbd> bật/tắt toàn màn hình (hoặc nhấp đúp chuột)<br>
 <kbd>Space</kbd> / <kbd>Enter</kbd> / <kbd>PageDown</kbd> / <kbd>→</kbd> TRIGGER: đếm ngược rồi hiện key visual<br>
 <kbd>R</kbd> / <kbd>PageUp</kbd> / <kbd>←</kbd> về loop chờ<br>
-<kbd>1</kbd>–<kbd>9</kbd>, <kbd>0</kbd> (vòng thứ 10) thử sáng từng vòng tay (ở loop chờ)<br>
+<kbd>1</kbd>–<kbd>5</kbd> thử sáng từng vòng tay (ở loop chờ)<br>
 <kbd>S</kbd> nhảy thẳng tới key visual<br>
 <kbd>M</kbd> bật/tắt âm thanh (mặc định TẮT)<br>
 <kbd>H</kbd> ẩn/hiện bảng này
 </div>
 <div id="toast"></div>
-<div id="fsHint"><span><kbd>F</kbd> toàn màn hình</span><span><kbd>1</kbd>–<kbd>9</kbd> <kbd>0</kbd> sáng từng vòng tay</span><span><kbd>Space</kbd> kích hoạt</span><span><kbd>R</kbd> reset</span></div>
+<div id="fsHint"><span><kbd>F</kbd> toàn màn hình</span><span><kbd>1</kbd>–<kbd>5</kbd> sáng từng vòng tay</span><span><kbd>Space</kbd> kích hoạt</span><span><kbd>R</kbd> reset</span></div>
 
 <script>
 (() => {
 /* ================= CẤU HÌNH — chỉnh theo vị trí tay thật trên màn LED ================= */
 const CFG = {
-  handsX: Array.from({ length: 10 }, (_, i) => 96 + i * 192), // tọa độ X tâm 10 vòng tay (px, canvas 1920x1080), cách đều 192px
+  handsX: Array.from({ length: 5 }, (_, i) => 192 + i * 384), // tọa độ X tâm 5 vòng tay (px, canvas 1920x1080), cách đều 384px
   handsY: 720,                          // tọa độ Y tâm vòng tay
-  handR: 82,                            // bán kính vòng tay
+  handR: 110,                            // bán kính vòng tay
   fx: 960, fy: 470,                     // điểm hội tụ của 5 tia điện
   numY: 250,                            // vị trí con số đếm ngược
   hint: 'ĐẶT TAY LÊN MÀN HÌNH ĐỂ KHỞI ĐỘNG DIỄN ĐÀN', // để '' nếu không muốn hiện chữ
@@ -281,7 +281,7 @@ const snd = {
 
 /* ================= TRẠNG THÁI ================= */
 let state = 'idle', t0 = 0, now = 0, beat = -1, boomed = false, RT = 0;
-const manual = new Array(10).fill(0), litS = new Array(10).fill(0);
+const manual = new Array(5).fill(0), litS = new Array(5).fill(0);
 
 function drawIdle(t) {
   logoP += (0 - logoP) * Math.min(1, dt * 4);
@@ -408,7 +408,7 @@ addEventListener('keydown', e => {
   else if (k === 'm' || k === 'M') { muted = !muted; toast('Âm thanh: ' + (muted ? 'TẮT' : 'BẬT')); }
   else if (k === 's' || k === 'S') { snd.stop(); state = 'reveal'; t0 = now; }
   else if (k === 'h' || k === 'H') ui.classList.toggle('on');
-  else if (k.length === 1 && '1234567890'.includes(k) && state === 'idle') { const i = k === '0' ? 9 : k - 1; manual[i] = manual[i] ? 0 : 1; }
+  else if (k.length === 1 && '12345'.includes(k) && state === 'idle') { const i = k - 1; manual[i] = manual[i] ? 0 : 1; }
 });
 addEventListener('dblclick', fs);
 let mt; addEventListener('mousemove', () => { document.body.classList.remove('hide'); clearTimeout(mt); mt = setTimeout(() => document.body.classList.add('hide'), 1500); });
